@@ -88,13 +88,16 @@
 
 S3 단독 배포 방식은 글로벌 사용자에게 리소스를 전달하는 데 한계가 있을 수 있습니다. 이를 확인하고 해결하기 위해 CloudFront를 도입하여 S3와 연계한 배포 방식을 적용했습니다. 이 과정에서 초기 응답 시간, 리소스 로딩 속도, 파일 크기 최적화 등에서 성능 개선 여부를 구체적으로 측정했습니다. 분석 결과, S3와 CDN 연계를 통해 기술적 이점뿐 아니라 사용자 경험의 체감 로딩 속도도 크게 향상되었습니다.
 
+<br/>
+
+
 ## 2️⃣ 주요 파일별 로딩 시간 개선
 
 ### 2-1) CDN 도입 전후 네트워크 요청 비교
 
 CDN 도입 전 네트워크 요청           |                | CDN 도입 후 네트워크 요청
 :----------------------------------:|:--------------:|:----------------------------------:
-![CDN 도입 전](cdn-before-network-request.png)          |                | ![CDN 도입 후](cdn-after-network-request.png)
+![CDN 도입 전](https://raw.githubusercontent.com/Ensil-dev/front_3rd_chapter4-1/refs/heads/chapter4-1-jungyoon/public/cdn-before-network-request.png)          |                | ![CDN 도입 후](https://raw.githubusercontent.com/Ensil-dev/front_3rd_chapter4-1/refs/heads/chapter4-1-jungyoon/public/cdn-after-network-request.png)
 
 
 ### 2-2) 주요 파일별 로딩 시간 개선
@@ -114,13 +117,16 @@ CDN 도입 전 네트워크 요청           |                | CDN 도입 후 �
 | CSS      | 9.0 kB   | 2.9 kB   | 67.8%  |
 | 메인 JS  | 166 kB   | 49.7 kB  | 70.1%  |
 
+<br/>
+
+
 ## 3️⃣ 주요 성능 지표
 
 ### 3-1) CDN 도입 전후 성능 통계 비교
 
 CDN 도입 전 성능 통계           |                | CDN 도입 후 성능 통계
 :----------------------------------:|:--------------:|:----------------------------------:
-![CDN 도입 전](cdn-before-performance-stats.png)          |                | ![CDN 도입 후](cdn-after-performance-stats.png)
+![CDN 도입 전](https://raw.githubusercontent.com/Ensil-dev/front_3rd_chapter4-1/refs/heads/chapter4-1-jungyoon/public/cdn-before-performance-stats.png)          |                | ![CDN 도입 후](https://raw.githubusercontent.com/Ensil-dev/front_3rd_chapter4-1/refs/heads/chapter4-1-jungyoon/public/cdn-after-performance-stats.png)
 
 
 ### 3-2) 주요 성능 지표 비교
@@ -131,7 +137,8 @@ CDN 도입 전 성능 통계           |                | CDN 도입 후 성능 
 | First Contentful Paint   | 0.15초 | 0.04초 | 73.3%  |
 | Largest Contentful Paint | 0.15초 | 0.04초 | 73.3%  |
 
----
+<br/>
+
 
 ## 4️⃣ 분석
 
@@ -150,6 +157,9 @@ CDN 도입 전 성능 통계           |                | CDN 도입 후 성능 
 - 체감 로딩 속도가 **70% 이상 개선** 되었습니다.
 - HTTPS 적용으로 **보안성이 강화** 되었습니다.
 - **글로벌 사용자 접근성 향상** 되었습니다.
+
+<br/>
+
 
 ## 5️⃣ 결론
 
