@@ -1,42 +1,70 @@
-name: Deploy Next.js to S3 and invalidate CloudFront
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main  # 또는 master, 프로젝트의 기본 브랜치 이름에 맞게 조정
-  workflow_dispatch:
+      - chapter4-1-jungyoon
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
 
 jobs:
-  deploy:
+  create-pr:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
+      - name: Create Pull Request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --base main \
+            --head "chapter4-1-jungyoon" \
+            --title "[9팀 이정윤] Chapter 4-1 성능 최적화 Part 1" \
+            --body-file .github/pull_request_template.md \
+            || echo "PR already exists"
 
-    - name: Install dependencies
-      run: npm ci
+  deploy:
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Build
-      run: npm run build
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Deploy to S3
-      run: |
-        aws s3 sync out/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
+      - name: Build
+        run: npm run build
 
-    - name: Invalidate CloudFront cache
-      run: |
-        aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to S3
+        run: |
+          aws s3 sync out/ s3://${{ secrets.S3_BUCKET_NAME }} --delete
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
