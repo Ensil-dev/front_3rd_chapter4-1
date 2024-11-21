@@ -1,7 +1,7 @@
-# 프론트엔드 배포 파이프라인 Report [기본]
+# 프론트엔드 배포 파이프라인 Report [기본 과제]
 
 ## 개요
-![배포 CI/CD 다이어그램](../image-1.png)
+![배포 CI/CD 다이어그램](../public/diagram.drawio.svg)
 
 ## 주요 단계 설명
 
