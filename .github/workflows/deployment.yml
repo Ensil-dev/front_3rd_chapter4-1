@@ -3,7 +3,7 @@ name: Deploy Next.js to S3 and Create PR
 on:
   push:
     branches:
-      - chapter4-1-이정윤
+      - chapter4-1-jungyoon
   workflow_dispatch:
 
 jobs:
@@ -73,7 +73,7 @@ jobs:
           echo "Creating PR from branch $PR_BRANCH to main"
           gh pr create \
             --base main \
-            --head "chapter4-1-이정윤" \
+            --head "chapter4-1-jungyoon" \
             --title "[9팀 이정윤] Chapter 4-1 성능 최적화 Part 1" \
             --body-file .github/pull_request_template.md \
             || echo "PR already exists"

@@ -6,7 +6,8 @@
 ## 주요 단계 설명
 
 ### 1️⃣ Git Repository
-기존 코드 변경이 이루어지고 main 브랜치에 push되면 파이프라인이 시작됩니다.
++ 작업 branch(chapter4-1-jungyoon)에서 push 시 자동으로 PR을 생성합니다.
++ 기존 코드 변경이 이루어지고 병합이 승인되어 main 브랜치에 push 되면 파이프라인이 시작됩니다.
 
 ### 2️⃣ GitHub Actions
 
