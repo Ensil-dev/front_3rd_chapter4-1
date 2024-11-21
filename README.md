@@ -1,12 +1,16 @@
-# 프론트엔드 배포 파이프라인 Report
+# 프론트엔드 배포 파이프라인 Report [기본 과제]
 
-## 개요
-![배포 CI/CD 다이어그램](image-1.png)
+## 배포 파이프라인 Diagram
+![배포 CI/CD Diagram](https://raw.githubusercontent.com/Ensil-dev/front_3rd_chapter4-1/refs/heads/chapter4-1-jungyoon/public/diagram.webp)
 
 ## 주요 단계 설명
 
 ### 1️⃣ Git Repository
-기존 코드 변경이 이루어지고 main 브랜치에 push되면 파이프라인이 시작됩니다.
++ 작업 branch(chapter4-1-jungyoon)에서 push 시 자동으로 PR을 생성합니다.
+![image](https://github.com/user-attachments/assets/10252d65-1643-4495-b3f3-fd33f7164520)
+
++ 메인테이너에 의해 병합이 승인되어 main 브랜치에 push 되면 CD 파이프라인이 시작됩니다.
+![image](https://github.com/user-attachments/assets/7bf00e9c-152b-49b0-b871-f82e9a86c49b)
 
 ### 2️⃣ GitHub Actions
 
@@ -74,5 +78,3 @@
 ### Repository secret과 환경변수
 + ``GitHub Secrets``는 **민감한 정보를 안전하게 저장하고 관리하는 기능**으로, AWS 자격 증명이나 API 키와 같은 정보를 포함합니다. 이 정보들은 GitHub Actions 워크플로우에서 참조되어 배포 과정에서 안전하게 사용됩니다.
 + ``환경변수``는 코드 내에 하드코딩하지 않고 외부 설정 파일이나 환경변수로 관리하여 **보안과 유연성**을 높이는 방식입니다.
-
-test
